@@ -1,13 +1,14 @@
 # Reproducible Research: Peer Assessment 1
+Justin Meyer  
+February 4, 2018  
+
+
 
 # Loading and preprocessing the data
 ## Code for reading in the dataset and/or processing the data
 
 
 ```r
-# Turn off scientific notation
-options(scipen=999)
-
 # Get the data
 activity <- read.csv("activity.csv", stringsAsFactors = FALSE)
 ```
@@ -21,26 +22,6 @@ activity <- read.csv("activity.csv", stringsAsFactors = FALSE)
 # For this part of the assignment, you can ignore the missing values in the dataset.
 # Calculate the total number of steps taken per day
 library(dplyr)
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```r
 agg_date <- activity %>%
   filter(!is.na(steps)) %>%
   group_by(date) %>%
@@ -53,10 +34,6 @@ ggplot(agg_date, aes(steps_per_day)) +
   labs(title = "Histogram of Steps per Day", 
        y = "Count",
        x = "Steps per Day")
-```
-
-```
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
@@ -148,10 +125,6 @@ ggplot(agg_date_imputed, aes(steps_per_day)) +
   labs(title = "Histogram of Steps per Day", 
        y = "Count",
        x = "Steps per Day")
-```
-
-```
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->

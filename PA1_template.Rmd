@@ -1,17 +1,26 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
+author: Justin Meyer
+date: February 4, 2018
 output: 
   html_document:
     keep_md: true
 ---
 
+```{r global_options, include=FALSE}
+# Turn off scientific notation
+options(scipen=999)
+
+# Show code, hide messages
+library(knitr)
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+```
+
 # Loading and preprocessing the data
 ## Code for reading in the dataset and/or processing the data
 
-```{r, echo = TRUE}
-
-# Turn off scientific notation
-options(scipen=999)
+```{r}
 
 # Get the data
 activity <- read.csv("activity.csv", stringsAsFactors = FALSE)
@@ -22,7 +31,7 @@ activity <- read.csv("activity.csv", stringsAsFactors = FALSE)
 
 ## Histogram of the total number of steps taken each day
 
-```{r, echo = TRUE}
+```{r}
 
 # For this part of the assignment, you can ignore the missing values in the dataset.
 # Calculate the total number of steps taken per day
@@ -44,7 +53,7 @@ ggplot(agg_date, aes(steps_per_day)) +
 
 ## Mean and median number of steps taken each day
 
-```{r, echo = TRUE}
+```{r}
 
 mean_steps_per_day <- round(mean(agg_date$steps_per_day), 1)
 
@@ -52,7 +61,7 @@ mean_steps_per_day <- round(mean(agg_date$steps_per_day), 1)
 
 The mean number of steps per day is `r mean_steps_per_day`.
 
-```{r, echo = TRUE}
+```{r}
 
 median_steps_per_day <- round(median(agg_date$steps_per_day), 1)
 
@@ -63,7 +72,7 @@ The median number of steps per day is `r median_steps_per_day`.
 # What is the average daily activity pattern?
 
 ## Time series plot of the average number of steps taken
-```{r, echo = TRUE}
+```{r}
 
 # Calculate mean number of steps per interval
 agg_interval <- activity %>%
@@ -82,7 +91,7 @@ plot(agg_interval$mean_steps ~ agg_interval$interval,
 
 ## The 5-minute interval that, on average, contains the maximum number of steps
 
-```{r, echo = TRUE}
+```{r}
 
 temp <- subset(agg_interval, mean_steps == max(agg_interval$mean_steps))
 
@@ -94,7 +103,7 @@ The 5-minute interval that, on average, contains the maximum number of steps is 
 
 ## Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
 
-```{r, echo = TRUE}
+```{r}
 
 temp <- nrow(activity[is.na(activity$steps),])
 
@@ -104,7 +113,7 @@ The total number of rows with a missing value for steps is `r temp`.
 
 ## Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 ## Create a new dataset that is equal to the original dataset but with the missing data filled in.
-```{r, echo = TRUE}
+```{r}
 
 # Join mean steps by interval data to activity data
 activity_imputed <- activity
@@ -118,7 +127,7 @@ activity_imputed$mean_steps <- NULL
 
 Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
-```{r, echo = TRUE}
+```{r}
 
 # For this part of the assignment, you can ignore the missing values in the dataset.
 # Calculate the total number of steps taken per day
@@ -138,7 +147,7 @@ ggplot(agg_date_imputed, aes(steps_per_day)) +
 
 ## Mean and median number of steps taken each day
 
-```{r, echo = TRUE}
+```{r}
 
 mean_steps_per_day_imputed <- round(mean(agg_date_imputed$steps_per_day), 1)
 
@@ -146,7 +155,7 @@ mean_steps_per_day_imputed <- round(mean(agg_date_imputed$steps_per_day), 1)
 
 The mean number of steps per day is `r mean_steps_per_day_imputed`.
 
-```{r, echo = TRUE}
+```{r}
 
 median_steps_per_day_imputed <- round(median(agg_date_imputed$steps_per_day), 1)
 
@@ -160,7 +169,7 @@ Yes, after imputing missing data the mean and median number of steps per day are
 
 ## Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 
-```{r, echo = TRUE}
+```{r}
 
 # Format data
 activity$weekday <- weekdays(as.Date(activity$date, "%Y-%m-%d"))
@@ -173,7 +182,7 @@ activity$weekend <- as.factor(activity$weekend)
 
 ## Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
 
-```{r, echo = TRUE}
+```{r}
 
 # Calculate mean number of steps per interval
 agg_interval <- activity %>%
