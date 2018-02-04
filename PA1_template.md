@@ -65,14 +65,14 @@ ggplot(agg_date, aes(steps_per_day)) +
 
 
 ```r
-mean_steps_per_day <- mean(agg_date$steps_per_day)
+mean_steps_per_day <- round(mean(agg_date$steps_per_day), 1)
 ```
 
-The mean number of steps per day is 10766.1886792.
+The mean number of steps per day is 10766.2.
 
 
 ```r
-median_steps_per_day <- median(agg_date$steps_per_day)
+median_steps_per_day <- round(median(agg_date$steps_per_day), 1)
 ```
 
 The median number of steps per day is 10765.
@@ -160,19 +160,19 @@ ggplot(agg_date_imputed, aes(steps_per_day)) +
 
 
 ```r
-mean_steps_per_day_imputed <- mean(agg_date_imputed$steps_per_day)
+mean_steps_per_day_imputed <- round(mean(agg_date_imputed$steps_per_day), 1)
 ```
 
-The mean number of steps per day is 10765.6393443.
+The mean number of steps per day is 10765.6.
 
 
 ```r
-median_steps_per_day_imputed <- median(agg_date_imputed$steps_per_day)
+median_steps_per_day_imputed <- round(median(agg_date_imputed$steps_per_day), 1)
 ```
 
 The median number of steps per day is 10762.
 
-Yes, after imputing missing data the mean and median number of steps per day are slightly different from before the missing data was imputed. The mean steps before imputation was 10766.1886792 but after imputation it is 10765.6393443. Similarly, he median steps before imputation was 10765 but after imputation it is 10762. There is only a small impact from imputing the missing data.
+Yes, after imputing missing data the mean and median number of steps per day are slightly different from before the missing data was imputed. The mean steps before imputation was 10766.2 but after imputation it is 10765.6. Similarly, the median steps before imputation was 10765 but after imputation it is 10762. There is only a small impact from imputing the missing data.
 
 # Are there differences in activity patterns between weekdays and weekends?
 
